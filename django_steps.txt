@@ -1,0 +1,114 @@
+conda create -n djangoenv python=3.6 anaconda 
+
+conda activate djangoenv
+
+conda install -c anaconda django
+
+django-admin startproject website 
+
+python manage.py runserver 
+
+conda activate djangoen
+
+---
+
+Model View Controller -- spring boot
+
+Model View Template -- django
+
+--
+
+Fast
+
+Component : connection componenet
+
+security 
+
+scalability --  future when the code increases 
+
+--
+
+static web page 
+
+dynamic page 
+
+---
+
+python manage.py startapp calc
+
+create url.py inside the calc
+
+--
+
+in calc url paste below
+
+from . import views 
+
+urlpatterns = [
+    path('', views.home, name = "home")
+]
+
+---
+
+copy this in views of calc
+
+from django.shortcuts import render
+
+from django.http import HttpResponse
+
+
+# Create your views here.
+
+
+def home(request):
+    #return render(request, "home.html", {"name": "Dinesh"})
+    return HttpResponse("Helo man")
+--
+
+add below in project urls 
+
+from django.contrib import admin
+from django.urls import path, include
+
+
+urlpatterns = [
+    path('', include('calc.urls')),
+    path('admin/', admin.site.urls),
+]
+---
+
+copy templates
+
+add in settings.py
+
+'DIRS': [os.path.join(BASE_DIR,'templates')],
+
+---
+
+now add in views .py
+
+from django.shortcuts import render
+from django.http import HttpResponse
+
+
+# Create your views here.
+
+
+def home(request):
+    return render(request, "home.html", {"name": "Dinesh"})
+    #return HttpResponse("Helo man")
+
+
+def add(request):
+
+    val1 = int(request.POST["num1"])
+    val2 = int(request.POST["num2"])
+    res = val1 + val2
+
+    return render(request, "result.html", {"result": res})
+
+---
+
+add in urls .py
+
+urlpatterns = [path("", views.home, name="home"), path("add", views.add, name="add")]
