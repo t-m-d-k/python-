@@ -1,4 +1,4 @@
-conda create -n djangoenv python=3.6 anaconda 
+conda create -n djangoenv python=3.6 anaconda        
 
 conda activate djangoenv
 
